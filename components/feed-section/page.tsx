@@ -1,5 +1,5 @@
-import React from 'react';
-import styles from './page.module.scss';
+import React from "react";
+import styles from "./page.module.scss";
 
 interface ImageData {
   model: string;
@@ -22,13 +22,13 @@ const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
     <div className={styles.feedSection}>
       <div className={styles.promptCard}>
         <div className={styles.prompt}>
-          <span>Question:</span> {prompt}
+          <span>AI Prompt:</span> {prompt}
         </div>
       </div>
       <div className={styles.imageGrid}>
         {images.map((image, index) => (
           <div key={index} className={styles.imageCard}>
-            <div className={styles.modelName}>{image.model}</div>
+            Model:<div className={styles.modelName}>{image.model}</div>
             <img src={image.src} alt={image.model} className={styles.image} />
           </div>
         ))}
