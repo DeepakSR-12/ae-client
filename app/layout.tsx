@@ -16,7 +16,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <div className="layout">
             <Header />
             <main className="main">{children}</main>
-            <Footer />
           </div>
         </ThemeProvider>
       </body>

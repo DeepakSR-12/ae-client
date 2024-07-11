@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './page.module.scss';
-import FeedSection, { FeedSectionData } from '../feed-section/page';
+import React from "react";
+import styles from "./page.module.scss";
+import FeedSection, { FeedSectionItem } from "../feed-section/page";
 
 interface FeedProps {
-  feedData: FeedSectionData[];
+  feedData: FeedSectionItem[];
 }
 
 const Feed: React.FC<FeedProps> = ({ feedData }) => {

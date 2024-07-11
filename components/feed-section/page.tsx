@@ -1,35 +1,41 @@
 import React from "react";
 import styles from "./page.module.scss";
 
-interface ImageData {
+interface ItemData {
   model: string;
-  src: string;
+  text?: string;
+  src?: string;
 }
 
-export interface FeedSectionData {
+export interface FeedSectionItem {
   prompt: string;
-  images: ImageData[];
+  items: ItemData[];
 }
 
 interface FeedSectionProps {
-  data: FeedSectionData;
+  data: FeedSectionItem;
 }
 
 const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
-  const { prompt, images } = data;
+  const { prompt, items } = data;
 
   return (
     <div className={styles.feedSection}>
-      <div className={styles.promptCard}>
-        <div className={styles.prompt}>
-          <span>AI Prompt:</span> {prompt}
-        </div>
+      <div className={styles.prompt}>
+        <span>AI Prompt:</span> {prompt}
       </div>
+
       <div className={styles.imageGrid}>
-        {images.map((image, index) => (
+        {items.map(({ model, src, text }, index) => (
           <div key={index} className={styles.imageCard}>
-            Model:<div className={styles.modelName}>{image.model}</div>
-            <img src={image.src} alt={image.model} className={styles.image} />
+            <div className={styles.modelName}>
+              <span>Model:</span> {model}
+            </div>
+            {src ? (
+              <img src={src} alt={model} className={styles.image} />
+            ) : text ? (
+              <div>{text}</div>
+            ) : null}
           </div>
         ))}
       </div>
