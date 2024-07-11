@@ -1,0 +1,10 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+.feedContainer {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    max-height: 100vh;
+  }
+  

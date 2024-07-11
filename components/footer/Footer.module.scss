@@ -1,0 +1,14 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.footer {
+    @include flex-center;
+    padding: $spacing-unit;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin-top: auto;
+
+    p {
+        margin: 0;
+    }
+}

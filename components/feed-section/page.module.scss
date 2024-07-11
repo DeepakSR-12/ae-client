@@ -1,0 +1,48 @@
+.feedSection {
+  padding: 20px;
+  margin-bottom: 60px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.prompt {
+  font-size: 18px;
+
+  span {
+    font-weight: bold;
+  }
+}
+
+.promptCard {
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+  margin-bottom: 16px;
+}
+
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.imageCard {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.modelName {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}

@@ -1,0 +1,198 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+
+.container {
+  padding: 20px;
+
+  .inner {
+    padding: 20px 20px;
+    margin: 20px 0;
+    border: 1px solid rgb(212, 212, 212);
+    border-radius: 10px;
+  }
+}
+
+.flexBtnGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.flexcol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  span {
+    color: rgb(253, 79, 79)
+  }
+
+  .loader {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.flexCategories {
+  display: flex;
+  gap: 2rem;
+
+  .tag {
+    background-color: rgb(225, 246, 225);
+    padding: 5px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .activeTag {
+    background-color: rgb(52, 173, 52);
+  }
+
+  .btn {}
+}
+.promptSectionHeaderInnerFlex {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.promptSectionHeader {
+  border: 2px solid #412b76;
+  border-radius: 20px;
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  // display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .flexHeader {
+    h5 {
+      margin: 0 0 5px 0;
+    }
+    p {
+      margin: 0;
+    }
+    svg {
+      width: 25px;
+    }
+  }
+}
+.promptSection {
+  margin-top: 40px;
+  min-height: 300px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  box-shadow: -10px 10px #6959c7, -10px 10px 0 2px #412b76;
+  border: 2px solid #412b76;
+  display: flex;
+
+  .section {
+    padding: 20px;
+    flex: 1;
+    border-right: 1px solid rgb(179, 179, 179);
+  }
+  .section {
+    height: 400px;
+    overflow: scroll;
+  }
+  .askbPrompt {
+    overflow: scroll;
+    height: 300px;
+  }
+  .askbPromptFull {
+    overflow: scroll;
+    height: 390px;
+  }
+  .sectionOption {
+    flex: 2;
+    padding: 20px;
+    height: 400px;
+    // overflow: scroll;
+    position: relative;
+    .tab {
+      display: flex;
+      // padding: 0 0 10px 0;
+      gap: 1rem;
+      border-bottom: 2px solid black;
+
+      .tabSection {
+        padding: 0 0 5px 0;
+        cursor: pointer;
+      }
+
+      .tabSectionActive {
+        cursor: pointer;
+        border-bottom: 2px solid black;
+      }
+    }
+  }
+}
+
+.flexrow {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.input {
+  border-radius: 20px;
+  border: 1px solid rgb(179, 179, 179);
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.pdf {
+  // width: 100px;
+  // height: 100px;
+  padding: 10px;
+  // border: 10px solid rgb(179, 179, 179);
+}
+
+.thumbnail {}
+
+.askb {
+  padding: 20px;
+  position: absolute;
+  width: 90%;
+  bottom: 0px;
+}
+
+.askbGlobal {
+  width: 100%;
+}
+
+.promptSectionHeaderInnerFlexHeader {
+  box-shadow: -5px 5px #6959c7, -5px 5px 0 2px #412b76;
+  border: 2px solid #412b76;
+  padding: 50px 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.globalMarkdown {
+  box-shadow: -5px 5px #d3ceee, -5px 5px 0 2px #ffffff;
+  border: 2px solid #c2c2c2;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.inputGlobal {
+  // box-shadow: -5px 5px #6959c7, -5px 5px 0 2px #412b76;
+  border-radius: 20px;
+  border: 2px solid #412b76;
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.bottomSection {
+  padding-top: 50px;
+}
+
+.btnClear {
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+}

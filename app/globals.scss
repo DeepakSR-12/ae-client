@@ -1,0 +1,33 @@
+@import './styles/variables';
+@import './styles/mixins';
+@import './styles/mediaqueries';
+@import './styles/globals';
+@import './styles/base';
+
+// Light Theme
+:root {
+    --primary-color: #{$light-primary-color};
+    --secondary-color: #{$light-secondary-color};
+    --secondary-background-color: #{$light-secondary-background-color};
+    --background-color: #{$light-background-color};
+    --text-color: #{$light-text-color};
+    --border-color: #{$light-border-color};
+    --brand-700: #{$light-brand-700};
+    --brand-500: #{$light-brand-500};
+    --brand-300: #{$light-brand-300};
+    --brand-100: #{$light-brand-100};
+}
+
+// Dark Theme
+[data-theme='dark'] {
+    --primary-color: #{$dark-primary-color};
+    --secondary-color: #{$dark-secondary-color};
+    --secondary-background-color: #{$light-secondary-background-color};
+    --background-color: #{$dark-background-color};
+    --text-color: #{$dark-text-color};
+    --border-color: #{$dark-border-color};
+    --brand-700: #{$light-brand-700};
+    --brand-500: #{$light-brand-500};
+    --brand-300: #{$light-brand-300};
+    --brand-100: #{$light-brand-100};
+}

@@ -1,0 +1,21 @@
+$breakpoint-sm: 600px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+
+@mixin respond-to-sm {
+    @media (max-width: $breakpoint-sm) {
+        @content;
+    }
+}
+
+@mixin respond-to-md {
+    @media (max-width: $breakpoint-md) {
+        @content;
+    }
+}
+
+@mixin respond-to-lg {
+    @media (max-width: $breakpoint-lg) {
+        @content;
+    }
+}

@@ -1,0 +1,44 @@
+@import '@/styles/variables';
+@import '@/styles/mixins';
+
+
+.container {
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+	.center {
+		margin: auto;
+		text-align: center;
+		img {
+			border-radius: 50px;
+		}
+	}
+	.centerbtngrp {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+	.centerbtn {
+		margin: auto;
+		text-align: center;
+		width: 25%;
+	}
+}
+.flexCategories {
+	display: flex;
+	gap: 2rem;
+
+	.tag {
+		background-color: rgb(225, 246, 225);
+		padding: 5px 15px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.activeTag {
+		background-color: rgb(52, 173, 52);
+	}
+	.btn {
+
+	}
+}

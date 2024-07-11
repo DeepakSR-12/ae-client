@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+
+.container {
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	gap: 4rem;
+}
+.flexCategories {
+	display: flex;
+	gap: 2rem;
+
+	.tag {
+		background-color: var(--brand-300);
+		padding: 5px 15px;
+		border-radius: 10px;
+		cursor: pointer;
+	}
+	.activeTag {
+		background-color: var(--brand-700);
+		color: white
+	}
+	.btn {
+
+	}
+}
