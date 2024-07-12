@@ -2,7 +2,6 @@
 
 import "./globals.scss";
 import { Header } from "@/components/header";
-import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 interface RootLayoutProps {
   children: React.ReactNode;
