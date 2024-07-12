@@ -22,19 +22,19 @@ const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
   return (
     <div className={styles.feedSection}>
       <div className={styles.prompt}>
-        <span>AI Prompt:</span> {prompt}
+        <span>AI Prompt: &nbsp;</span> {prompt}
       </div>
 
       <div className={styles.imageGrid}>
         {items.map(({ model, src, text }, index) => (
           <div key={index} className={styles.imageCard}>
             <div className={styles.modelName}>
-              <span>Model:</span> {model}
+              Model: &nbsp;&nbsp;<span>{model}</span>
             </div>
             {src ? (
               <img src={src} alt={model} className={styles.image} />
             ) : text ? (
-              <div>{text}</div>
+              <div className={styles.text}>{text}</div>
             ) : null}
           </div>
         ))}

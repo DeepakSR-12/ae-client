@@ -2,7 +2,7 @@
   padding: 48px 32px;
   margin-bottom: 60px;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 24px;
   background-color: #f9f9f9;  
 }
 
@@ -35,9 +35,7 @@
   background-color: #fff;
 }
 
-.modelName {
-  margin-bottom: 32px;
-  
+.modelName {  
   span {
     font-weight: bold;
   }
@@ -46,5 +44,10 @@
 .image {
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 24px;
+  margin-top: 24px;
+}
+
+.text {
+  margin-top: 32px;
 }
