@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
+import Image from "next/image";
 
 export const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -30,7 +31,7 @@ export const Header: React.FC = () => {
 
   return (
     <header className={`${styles.header} ${scrolled ? styles.scrolled : ""}`}>
-      <img src="/earn.png" alt="aloha-earn" />
+      <Image src="/logo.svg" alt="aloha-earn" width={180} height={56} />
     </header>
   );
 };
