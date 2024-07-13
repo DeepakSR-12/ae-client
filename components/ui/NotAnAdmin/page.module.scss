@@ -1,0 +1,38 @@
+.notAnAdmin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-top: 10%;
+
+    .image {
+        position: relative;
+        width: 18rem;
+        height: 18rem;
+    }
+
+    .label {
+        font-size: 2rem;
+        color: var(--text-color);
+        text-align: center;
+        margin-top: -70px;
+    }
+
+    .access {
+        display: flex;
+        align-items: center;
+        height: 40px;
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 20px;
+        cursor: pointer;
+        border-radius: 24px;
+        margin-top: 20px;
+    
+        &:hover {
+          background-color: white;
+          color: var(--secondary-color);
+        }
+      }
+}

@@ -2,15 +2,39 @@
 @import '../../styles/mixins';
 
 .header {
-  @include flex-center;
+  display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px 80px;
   position: fixed;
   top: 0;
-  width: 100%;
+  left: 0;
+  right: 0;
   z-index: 100;
   background-color: white;
   transition: background-color 0.3s;
+  max-width: 88rem;
+  margin: auto;
+
+  .image {
+    cursor: pointer;
+  }
+
+  .admin {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 20px;
+    cursor: pointer;
+    border-radius: 24px;
+
+    &:hover {
+      background-color: white;
+      color: var(--secondary-color);
+    }
+  }
 
   &.scrolled {
     background-color: var(--brand-100);
