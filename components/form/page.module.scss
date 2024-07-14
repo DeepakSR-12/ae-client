@@ -7,9 +7,11 @@
   border: 1px solid #ccc;
   border-radius: 8px;
   background-color: #f9f9f9;
+  margin-bottom: 40px;
 
   .formGroup {
     margin-bottom: 15px;
+    width: 100%;
 
     label {
       display: block;
@@ -26,6 +28,7 @@
       margin-bottom: 5px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      box-sizing: border-box;
     }
 
     .textarea {
@@ -34,11 +37,13 @@
 
     .fileInput {
       padding: 0;
+      height: auto;
     }
 
     .error {
       color: red;
       font-size: 12px;
+      margin-bottom: 12px;
     }
 
     .submitButton {
