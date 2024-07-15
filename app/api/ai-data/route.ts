@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { retrieveAiData } from "../../../lib/ai-data";
-import dbConnect from "../../../lib/db";
 
 export async function GET() {
   try {
