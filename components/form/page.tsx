@@ -3,27 +3,46 @@ import { useForm, Controller } from "react-hook-form";
 import toast from "react-hot-toast";
 import styles from "./page.module.scss";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export type AIFormData = {
   prompt: string;
   promptType: string;
   modelName1: string;
   text1?: string;
-  image1?: FileList;
+  image1?: FileList | null;
   modelName2: string;
   text2?: string;
-  image2?: FileList;
+  image2?: FileList | null;
   modelName3: string;
   text3?: string;
-  image3?: FileList;
+  image3?: FileList | null;
   modelName4: string;
   text4?: string;
-  image4?: FileList;
+  image4?: FileList | null;
 };
 
 const FormComponent: React.FC = () => {
-  const { control, handleSubmit, reset, watch } = useForm<AIFormData>();
+  const { control, handleSubmit, reset, watch } = useForm<AIFormData>({
+    defaultValues: {
+      prompt: "",
+      promptType: "",
+      modelName1: "",
+      text1: "",
+      image1: null,
+      modelName2: "",
+      text2: "",
+      image2: null,
+      modelName3: "",
+      text3: "",
+      image3: null,
+      modelName4: "",
+      text4: "",
+      image4: null,
+    },
+  });
   const [promptType, setPromptType] = useState("text");
+  const router = useRouter();
 
   const onSubmit = async (data: AIFormData) => {
     const formSubmitData = new FormData();
@@ -55,11 +74,15 @@ const FormComponent: React.FC = () => {
       }
 
       toast.success("Form submitted successfully");
-      reset();
     } catch (error) {
       toast.error("Form submission failed");
+    } finally {
+      reset();
+      router.refresh();
     }
   };
+
+  console.log({ watch: watch() });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>

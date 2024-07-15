@@ -20,6 +20,8 @@ interface FeedSectionProps {
 const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
   const { prompt, items } = data;
 
+  const imageBackgroundColors = ["#F3EDFF", "#FAFFDE", "#FFF0E8", "#FFF"];
+
   return (
     <div className={styles.feedSection}>
       <div className={styles.prompt}>
@@ -28,7 +30,11 @@ const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
 
       <div className={styles.imageGrid}>
         {items.map(({ model, src, text }, index) => (
-          <div key={index} className={styles.imageCard}>
+          <div
+            key={index}
+            style={{ background: imageBackgroundColors[index] }}
+            className={styles.imageCard}
+          >
             <div className={styles.modelName}>
               Model: &nbsp;&nbsp;<span>{model}</span>
             </div>
