@@ -1,0 +1,39 @@
+.loaderContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  gap: 1rem;
+}
+
+.logoContainer {
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  animation: spin 1s linear infinite, bounce 2s infinite;
+}
+
+.message {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-muted-foreground);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}

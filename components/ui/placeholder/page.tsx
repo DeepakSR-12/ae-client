@@ -3,11 +3,12 @@ import styles from "./page.module.scss";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-interface NotAnAdminProps {
+interface PlaceholderProps {
   label: string;
+  path?: string;
 }
 
-const NotAnAdmin = ({ label }: NotAnAdminProps) => {
+const Placeholder = ({ label, path }: PlaceholderProps) => {
   const router = useRouter();
 
   const promise = async () => {
@@ -27,16 +28,22 @@ const NotAnAdmin = ({ label }: NotAnAdminProps) => {
   };
 
   return (
-    <div className={styles.notAnAdmin}>
+    <div className={styles.placeholder}>
       <div className={styles.image}>
-        <Image alt="notAnAdmin" src="/logo.svg" fill />
+        <Image alt="placeholder" src="/logo.svg" fill />
       </div>
       <div className={styles.label}>{label}</div>
-      <button onClick={request} className={styles.access}>
-        Request Access
-      </button>
+      {path ? (
+        <button onClick={() => router.push(path)} className={styles.access}>
+          Go to Admin
+        </button>
+      ) : (
+        <button onClick={request} className={styles.access}>
+          Request Access
+        </button>
+      )}
     </div>
   );
 };
 
-export default NotAnAdmin;
+export default Placeholder;

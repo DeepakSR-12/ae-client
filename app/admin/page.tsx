@@ -1,7 +1,7 @@
 "use client";
 
 import FormComponent from "@/components/form/page";
-import NotAnAdmin from "@/components/ui/NotAnAdmin/page";
+import Placeholder from "@/components/ui/placeholder/page";
 import { useUser } from "@clerk/nextjs";
 import React from "react";
 
@@ -17,7 +17,7 @@ const Admin = () => {
           <FormComponent />
         </div>
       ) : user ? (
-        <NotAnAdmin label="You are not an Admin" />
+        <Placeholder label="You are not an Admin" />
       ) : null}
     </div>
   );
