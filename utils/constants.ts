@@ -1,216 +1,71 @@
-import { FeedSectionItem } from "@/components/feed-section/page";
+import { uploadImageToFirebase } from "@/lib/firebase";
 
-export const feedData: FeedSectionItem[] = [
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt:
-      "An astronaut riding a horse on mars artstation, hd, dramatic lighting, detailed;",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar2.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr2.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds2.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv2.png" },
-    ],
-  },
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt: "A picture of the dog running in the Himalayas!",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv.png" },
-    ],
-  },
-  {
-    prompt:
-      "An astronaut riding a horse on mars artstation, hd, dramatic lighting, detailed;",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar2.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr2.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds2.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv2.png" },
-    ],
-  },
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt: "A picture of the dog running in the Himalayas!",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv.png" },
-    ],
-  },
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt:
-      "An astronaut riding a horse on mars artstation, hd, dramatic lighting, detailed;",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar2.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr2.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds2.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv2.png" },
-    ],
-  },
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt: "A picture of the dog running in the Himalayas!",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv.png" },
-    ],
-  },
-  {
-    prompt: "Explain the concept of climate change in simple terms.",
-    items: [
-      {
-        model: "Absolute Reality V1.8.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Dreamshaper 8",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "Realistic Vision V5.1",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-      {
-        model: "CyberRealistic V3.3",
-        text: "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-      },
-    ],
-  },
-  {
-    prompt:
-      "An astronaut riding a horse on mars artstation, hd, dramatic lighting, detailed;",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar2.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr2.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds2.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv2.png" },
-    ],
-  },
-  {
-    prompt: "A picture of the dog running in the Himalayas!",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv.png" },
-    ],
-  },
-  {
-    prompt:
-      "An astronaut riding a horse on mars artstation, hd, dramatic lighting, detailed;",
-    items: [
-      { model: "Absolute Reality V1.8.1", src: "/model-images/ar2.png" },
-      { model: "Dreamshaper 8", src: "/model-images/cr2.png" },
-      { model: "Realistic Vision V5.1", src: "/model-images/ds2.png" },
-      { model: "CyberRealistic V3.3", src: "/model-images/rv2.png" },
-    ],
-  },
-];
+export const transformPayload = async (body: any) => {
+  const {
+    prompt,
+    promptType,
+    modelName1,
+    text1,
+    image1,
+    modelName2,
+    text2,
+    image2,
+    modelName3,
+    text3,
+    image3,
+    modelName4,
+    text4,
+    image4,
+  } = body;
+
+  const uploadTasks = [
+    image1
+      ? uploadImageToFirebase(image1).catch((e) => {
+          console.error(e);
+          return undefined;
+        })
+      : Promise.resolve(undefined),
+    image2
+      ? uploadImageToFirebase(image2).catch((e) => {
+          console.error(e);
+          return undefined;
+        })
+      : Promise.resolve(undefined),
+    image3
+      ? uploadImageToFirebase(image3).catch((e) => {
+          console.error(e);
+          return undefined;
+        })
+      : Promise.resolve(undefined),
+    image4
+      ? uploadImageToFirebase(image4).catch((e) => {
+          console.error(e);
+          return undefined;
+        })
+      : Promise.resolve(undefined),
+  ];
+
+  const imageUrls = await Promise.all(uploadTasks);
+
+  const items = [
+    { model: modelName1, text: text1, image: imageUrls[0] },
+    { model: modelName2, text: text2, image: imageUrls[1] },
+    { model: modelName3, text: text3, image: imageUrls[2] },
+    { model: modelName4, text: text4, image: imageUrls[3] },
+  ]
+    .map((item) => {
+      if (item.text) {
+        return { model: item.model, text: item.text };
+      } else if (item.image) {
+        return { model: item.model, src: item.image };
+      }
+      return null;
+    })
+    .filter((item) => item !== null);
+
+  return {
+    prompt,
+    promptType,
+    items,
+  };
+};

@@ -9,6 +9,7 @@ interface ItemData {
 
 export interface FeedSectionItem {
   prompt: string;
+  promptType: string;
   items: ItemData[];
 }
 

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import styles from "./page.module.scss";
 import axios from "axios";
 
-type FormData = {
+export type AIFormData = {
   prompt: string;
   promptType: string;
   modelName1: string;
@@ -22,51 +22,32 @@ type FormData = {
 };
 
 const FormComponent: React.FC = () => {
-  const { control, handleSubmit, reset, watch } = useForm<FormData>();
+  const { control, handleSubmit, reset, watch } = useForm<AIFormData>();
   const [promptType, setPromptType] = useState("text");
 
-  const testData: FormData = {
-    promptType: "text",
-    prompt: "Explain the concept of climate change in simple terms.",
-    modelName1: "Absolute Reality V1.8.1",
-    text1:
-      "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-    modelName2: "Dreamshaper 8",
-    text2:
-      "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-    modelName3: "Realistic Vision V5.1",
-    text3:
-      "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-    modelName4: "CyberRealistic V3.3",
-    text4:
-      "Climate change refers to significant changes in global temperatures and weather patterns over time. While climate change is a natural phenomenon, scientific evidence shows that human activities, such as burning fossil fuels and deforestation, have significantly accelerated these changes in recent decades.",
-  };
+  const onSubmit = async (data: AIFormData) => {
+    const formSubmitData = new FormData();
 
-  const onSubmit = async () => {
-    // const onSubmit = async (data: FormData) => {
-    const formData = new FormData();
-
-    const data = testData;
-
-    formData.append("prompt", data.prompt);
-    formData.append("promptType", data.promptType);
-    formData.append("modelName1", data.modelName1);
-    if (data.text1) formData.append("text1", data.text1);
-    if (data.image1) formData.append("image1", data.image1[0]);
-    formData.append("modelName2", data.modelName2);
-    if (data.text2) formData.append("text2", data.text2);
-    if (data.image2) formData.append("image2", data.image2[0]);
-    formData.append("modelName3", data.modelName3);
-    if (data.text3) formData.append("text3", data.text3);
-    if (data.image3) formData.append("image3", data.image3[0]);
-    formData.append("modelName4", data.modelName4);
-    if (data.text4) formData.append("text4", data.text4);
-    if (data.image4) formData.append("image4", data.image4[0]);
+    formSubmitData.append("prompt", data.prompt);
+    formSubmitData.append("promptType", data.promptType);
+    formSubmitData.append("modelName1", data.modelName1);
+    if (data.text1) formSubmitData.append("text1", data.text1);
+    if (data.image1) formSubmitData.append("image1", data.image1[0]);
+    formSubmitData.append("modelName2", data.modelName2);
+    if (data.text2) formSubmitData.append("text2", data.text2);
+    if (data.image2) formSubmitData.append("image2", data.image2[0]);
+    formSubmitData.append("modelName3", data.modelName3);
+    if (data.text3) formSubmitData.append("text3", data.text3);
+    if (data.image3) formSubmitData.append("image3", data.image3[0]);
+    formSubmitData.append("modelName4", data.modelName4);
+    if (data.text4) formSubmitData.append("text4", data.text4);
+    if (data.image4) formSubmitData.append("image4", data.image4[0]);
 
     try {
-      const response = await axios.post("/api/submit", {
-        // body: formData,
-        body: testData,
+      const response = await axios.post("/api/submit", formSubmitData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       });
 
       if (!response.data) {
@@ -74,13 +55,11 @@ const FormComponent: React.FC = () => {
       }
 
       toast.success("Form submitted successfully");
-      // reset();
+      reset();
     } catch (error) {
       toast.error("Form submission failed");
     }
   };
-
-  console.log({ watch: watch() });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
@@ -279,6 +258,7 @@ const FormComponent: React.FC = () => {
                     onChange={(e) => field.onChange(e.target.files)}
                     id="image1"
                     className={styles.fileInput}
+                    accept=".png, .jpg, .jpeg"
                   />
                   {error && <div className={styles.error}>{error.message}</div>}
                 </div>
@@ -314,6 +294,7 @@ const FormComponent: React.FC = () => {
                     onChange={(e) => field.onChange(e.target.files)}
                     id="image2"
                     className={styles.fileInput}
+                    accept=".png, .jpg, .jpeg"
                   />
                   {error && <div className={styles.error}>{error.message}</div>}
                 </div>
@@ -349,6 +330,7 @@ const FormComponent: React.FC = () => {
                     onChange={(e) => field.onChange(e.target.files)}
                     id="image3"
                     className={styles.fileInput}
+                    accept=".png, .jpg, .jpeg"
                   />
                   {error && <div className={styles.error}>{error.message}</div>}
                 </div>
@@ -384,6 +366,7 @@ const FormComponent: React.FC = () => {
                     onChange={(e) => field.onChange(e.target.files)}
                     id="image4"
                     className={styles.fileInput}
+                    accept=".png, .jpg, .jpeg"
                   />
                   {error && <div className={styles.error}>{error.message}</div>}
                 </div>
@@ -393,14 +376,8 @@ const FormComponent: React.FC = () => {
         </>
       )}
 
-      {/* <div className={styles.formGroup}>
-        <button type="submit" className={styles.submitButton}>
-          Submit
-        </button>
-      </div> */}
-
       <div className={styles.formGroup}>
-        <button onClick={() => onSubmit()} className={styles.submitButton}>
+        <button type="submit" className={styles.submitButton}>
           Submit
         </button>
       </div>
