@@ -69,3 +69,27 @@ export const transformPayload = async (body: any) => {
     items,
   };
 };
+
+export const prodiaModels = [];
+
+export const modelTypes: Record<string, string> = {
+  "gpt-4o": "GPT-4o",
+  claude: "Claude 3.5 Sonnet",
+  llama: "llama",
+  gemini: "gemini",
+  prodia: "prodia",
+  dalle: "dall-e-3",
+  midjourney: "midjourney",
+};
+
+export const textModels = [
+  { value: "gpt-4o", label: "GPT-4o" },
+  // { value: "claude", label: "Claude 3.5 Sonnet" },
+];
+
+export const cardBackgroundColors = ["#F3EDFF", "#FAFFDE", "#FFF0E8", "#FFF"];
+
+export const promptTypeOptions = [
+  { value: "text", label: "Text" },
+  // { value: "image", label: "Image" },
+];

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./page.module.scss";
+import { cardBackgroundColors } from "@/utils/constants";
 
 interface ItemData {
   model: string;
@@ -20,8 +21,6 @@ interface FeedSectionProps {
 const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
   const { prompt, items } = data;
 
-  const imageBackgroundColors = ["#F3EDFF", "#FAFFDE", "#FFF0E8", "#FFF"];
-
   return (
     <div className={styles.feedSection}>
       <div className={styles.prompt}>
@@ -32,7 +31,7 @@ const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
         {items.map(({ model, src, text }, index) => (
           <div
             key={index}
-            style={{ background: imageBackgroundColors[index] }}
+            style={{ background: cardBackgroundColors[index] }}
             className={styles.imageCard}
           >
             <div className={styles.modelName}>

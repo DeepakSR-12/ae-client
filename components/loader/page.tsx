@@ -1,15 +1,19 @@
-import Image from "next/image";
 import styles from "./page.module.scss";
+import { Flex, Spin } from "antd";
 
 interface LoaderProps {
   message?: string;
 }
 
-const Loader: React.FC<LoaderProps> = ({ message = "Your feed is loading..." }) => {
+const Loader: React.FC<LoaderProps> = ({
+  message = "Your feed is loading...",
+}) => {
   return (
     <div className={styles.loaderContainer}>
       <div className={styles.logoContainer}>
-        <Image alt="logo" src="/logo.svg" fill />
+        <Flex justify="center" align="center">
+          <Spin size="large" />
+        </Flex>
       </div>
       <p className={styles.message}>{message}</p>
     </div>

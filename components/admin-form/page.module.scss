@@ -1,0 +1,137 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto 50px;
+
+  .label {
+    font-weight: bold;
+    text-wrap: nowrap;
+  }
+
+  .select {
+    height: 60px;
+    width: 100%;
+
+    :global(.ant-select-selector) {
+      border-radius: 16px;
+    }
+
+    &:hover {
+      border: unset;
+    }
+  }
+
+  .input {
+    width: 100%;
+    height: 60px;
+    border-radius: 16px;
+    background: #fff;
+
+    &:hover {
+      border: 1px solid #989898;
+      box-shadow: none;
+    }
+
+    &:focus {
+      border: 1px solid #989898;
+      box-shadow: none;
+    }
+  }
+
+  .formGroup {
+    padding: 48px 32px;
+    margin-bottom: 64px;
+    border-radius: 24px;
+    background-color: #f6f4f8;
+    line-height: 25.2px;
+
+    .promptTypeSection {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .aiPromptSection {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 40px;
+
+      .inputSection {
+        width: 100%;
+      }
+    }
+  }
+
+  .textSection {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    .modelSection {
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+      gap: 16px;
+
+      border: 1px solid #989898;
+      padding: 24px;
+      border-radius: 24px;
+      background-color: #fff;
+
+      .chooseModelSection {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .generateButton {
+        display: flex;
+        justify-content: center;
+
+        button {
+          display: flex;
+          align-items: center;
+          height: 48px;
+          padding: 12px 32px;
+          border-radius: 24px;
+          border: 1px solid #000;
+          background: #fff;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .submit {
+    display: flex;
+    justify-content: center;
+
+    .submitButton {
+      display: flex;
+      justify-content: center;
+      padding: 16px 120px;
+      width: 120px;
+      height: 40px;
+      border-radius: 24px;
+      background: #a26bfc;
+      color: white;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background: #8c4ff7;
+        color: white;
+      }
+    }
+  }
+
+  .error {
+    color: red;
+    font-size: 12px;
+    margin-left: 12px;
+  }
+}
