@@ -82,8 +82,6 @@ const FormComponent: React.FC = () => {
     }
   };
 
-  console.log({ watch: watch() });
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles.formGroup}>

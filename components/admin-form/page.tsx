@@ -5,28 +5,32 @@ import { TypeAnimation } from "react-type-animation";
 import styles from "./page.module.scss";
 import {
   cardBackgroundColors,
+  convertUrlsToFiles,
+  dalleModels,
+  imageModelsLabelValue,
   modelTypes,
   promptTypeOptions,
-  textModels,
+  textModelsLabelValue,
 } from "@/utils/constants";
 import axios from "axios";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export type AIFormData = {
   promptType: string;
   prompt: string;
   modelName1: string;
   text1?: string;
-  image1?: FileList | null;
+  image1?: string;
   modelName2: string;
   text2?: string;
-  image2?: FileList | null;
+  image2?: string;
   modelName3: string;
   text3?: string;
-  image3?: FileList | null;
+  image3?: string;
   modelName4: string;
   text4?: string;
-  image4?: FileList | null;
+  image4?: string;
 };
 
 const AdminFormComponent: React.FC = () => {
@@ -36,16 +40,16 @@ const AdminFormComponent: React.FC = () => {
       prompt: "",
       modelName1: "",
       text1: "",
-      image1: null,
+      image1: "",
       modelName2: "",
       text2: "",
-      image2: null,
+      image2: "",
       modelName3: "",
       text3: "",
-      image3: null,
+      image3: "",
       modelName4: "",
       text4: "",
-      image4: null,
+      image4: "",
     },
   });
 
@@ -66,12 +70,26 @@ const AdminFormComponent: React.FC = () => {
     watch("text3"),
     watch("text4"),
   ];
+  const imageFields = [
+    watch("image1"),
+    watch("image2"),
+    watch("image3"),
+    watch("image4"),
+  ];
   const [isTextGenerating, setIsTextGenerating] = useState<boolean[]>([
     false,
     false,
     false,
     false,
   ]);
+
+  const [isImageGenerating, setIsImageGenerating] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
+
   const refs = [
     useRef<HTMLDivElement>(null),
     useRef<HTMLDivElement>(null),
@@ -83,6 +101,10 @@ const AdminFormComponent: React.FC = () => {
     (isGenerating) => isGenerating
   );
 
+  const isAnyOneImageGenerating = isImageGenerating.some(
+    (isGenerating) => isGenerating
+  );
+
   const onSubmit = async (data: AIFormData) => {
     const formSubmitData = new FormData();
 
@@ -90,16 +112,27 @@ const AdminFormComponent: React.FC = () => {
     formSubmitData.append("promptType", data.promptType);
     formSubmitData.append("modelName1", modelTypes[data.modelName1]);
     if (data.text1) formSubmitData.append("text1", data.text1);
-    if (data.image1) formSubmitData.append("image1", data.image1[0]);
     formSubmitData.append("modelName2", modelTypes[data.modelName2]);
     if (data.text2) formSubmitData.append("text2", data.text2);
-    if (data.image2) formSubmitData.append("image2", data.image2[0]);
     formSubmitData.append("modelName3", modelTypes[data.modelName3]);
     if (data.text3) formSubmitData.append("text3", data.text3);
-    if (data.image3) formSubmitData.append("image3", data.image3[0]);
     formSubmitData.append("modelName4", modelTypes[data.modelName4]);
     if (data.text4) formSubmitData.append("text4", data.text4);
-    if (data.image4) formSubmitData.append("image4", data.image4[0]);
+
+    // Convert image URLs to File objects and append them to form data
+    const imageUrls = {
+      image1: data.image1 ?? "",
+      image2: data.image2 ?? "",
+      image3: data.image3 ?? "",
+      image4: data.image4 ?? "",
+    };
+
+    const imageFiles = await convertUrlsToFiles(imageUrls);
+
+    if (imageFiles.image1) formSubmitData.append("image1", imageFiles.image1);
+    if (imageFiles.image2) formSubmitData.append("image2", imageFiles.image2);
+    if (imageFiles.image3) formSubmitData.append("image3", imageFiles.image3);
+    if (imageFiles.image4) formSubmitData.append("image4", imageFiles.image4);
 
     try {
       const response = await axios.post("/api/submit", formSubmitData, {
@@ -153,6 +186,44 @@ const AdminFormComponent: React.FC = () => {
     }
   };
 
+  const generateImage = async (modelName: string, index: number) => {
+    const newIsImageGenerating = [...isImageGenerating];
+    newIsImageGenerating[index] = true;
+    setIsImageGenerating(newIsImageGenerating);
+
+    try {
+      if (!prompt) {
+        toast.error(`Prompt is required`);
+        return;
+      }
+
+      if (!modelName) {
+        toast.error(`Model Name is required`);
+        return;
+      }
+
+      const response = await axios.post("/api/image", {
+        prompt,
+        modelName,
+      });
+
+      if (!response.data) {
+        throw new Error("Network response was not ok");
+      }
+
+      setValue(
+        `image${index + 1}` as keyof AIFormData,
+        dalleModels.includes(modelName)
+          ? `data:image/png;base64,${response.data.imageUrl}`
+          : response.data.imageUrl
+      );
+    } catch (error) {
+      toast.error(`Image generation failed`);
+    } finally {
+      setIsImageGenerating([false, false, false, false]);
+    }
+  };
+
   const scrollToBottom = (index: number) => {
     if (refs[index].current) {
       refs[index].current.scrollTop = refs[index].current.scrollHeight;
@@ -175,12 +246,13 @@ const AdminFormComponent: React.FC = () => {
 
   const renderModelSection = (
     modelName: string,
-    text: string | undefined,
-    index: number
+    item: string | undefined,
+    index: number,
+    type: "text" | "image"
   ) => (
     <div
       className={styles.modelSection}
-      key={modelName}
+      key={`${modelName}-${item}`}
       style={{ background: cardBackgroundColors[index] }}
     >
       <Controller
@@ -196,53 +268,98 @@ const AdminFormComponent: React.FC = () => {
                 placeholder="Choose an AI model"
                 value={value || null}
                 onChange={onChange}
-                options={textModels}
+                options={
+                  promptType === "text"
+                    ? textModelsLabelValue
+                    : imageModelsLabelValue
+                }
               />
               {error && <div className={styles.error}>{error.message}</div>}
             </div>
           </div>
         )}
       />
-      <div
-        ref={refs[index]}
-        style={{
-          display: "flex",
-          overflow: "auto",
-          justifyContent: text ? "flex-start" : "center",
-          alignItems: text ? "flex-start" : "center",
-          height: "100%",
-        }}
-      >
-        {text ? (
-          <TypeAnimation
-            key={text}
-            splitter={(str) => str.split(/(?= )/)}
-            sequence={[text]}
-            wrapper="span"
-            cursor={true}
-            speed={70}
-            repeat={1}
-          />
-        ) : (
-          <div className={styles.generateButton}>
-            <Button
-              loading={isTextGenerating[index]}
-              disabled={
-                isTextGenerating[index] ||
-                isSubmitting ||
-                isAnyOneTextGenerating
-              }
-              onClick={() =>
-                // @ts-ignore
-                generateText(modelTypes[watch(`${modelName}`)], index)
-              }
-            >
-              Generate
-            </Button>
-          </div>
-        )}
-      </div>
-      {text && (
+      {type === "text" ? (
+        <div
+          ref={refs[index]}
+          style={{
+            display: "flex",
+            overflow: "auto",
+            justifyContent: item ? "flex-start" : "center",
+            alignItems: item ? "flex-start" : "center",
+            height: "100%",
+          }}
+        >
+          {item ? (
+            <TypeAnimation
+              key={item}
+              splitter={(str) => str.split(/(?= )/)}
+              sequence={[item]}
+              wrapper="span"
+              cursor={true}
+              speed={70}
+              repeat={1}
+            />
+          ) : (
+            <div className={styles.generateButton}>
+              <Button
+                loading={isTextGenerating[index]}
+                disabled={
+                  isTextGenerating[index] ||
+                  isSubmitting ||
+                  isAnyOneTextGenerating
+                }
+                onClick={() =>
+                  // @ts-ignore
+                  generateText(modelTypes[watch(`${modelName}`)], index)
+                }
+              >
+                Generate
+              </Button>
+            </div>
+          )}
+        </div>
+      ) : (
+        <div
+          ref={refs[index]}
+          style={{
+            display: "flex",
+            overflow: "auto",
+            justifyContent: item ? "flex-start" : "center",
+            alignItems: item ? "flex-start" : "center",
+            height: "100%",
+          }}
+        >
+          {item ? (
+            <div className={styles.imageCard}>
+              <Image
+                src={item}
+                layout="fill"
+                objectFit="cover"
+                alt="Mountains"
+              />
+            </div>
+          ) : (
+            <div className={styles.generateButton}>
+              <Button
+                loading={isImageGenerating[index]}
+                disabled={
+                  isImageGenerating[index] ||
+                  isSubmitting ||
+                  isAnyOneImageGenerating
+                }
+                onClick={() =>
+                  // @ts-ignore
+                  generateImage(watch(`${modelName}`), index)
+                }
+              >
+                Generate
+              </Button>
+            </div>
+          )}
+        </div>
+      )}
+      {item && type === "text" ? (
         <div style={{ display: "flex", marginTop: "auto" }}>
           <div className={styles.generateButton}>
             <Button
@@ -261,7 +378,26 @@ const AdminFormComponent: React.FC = () => {
             </Button>
           </div>
         </div>
-      )}
+      ) : type === "image" && item ? (
+        <div style={{ display: "flex", marginTop: "auto" }}>
+          <div className={styles.generateButton}>
+            <Button
+              loading={isImageGenerating[index]}
+              disabled={
+                isImageGenerating[index] ||
+                isSubmitting ||
+                isAnyOneImageGenerating
+              }
+              onClick={() =>
+                // @ts-ignore
+                generateImage(modelTypes[watch(`${modelName}`)], index)
+              }
+            >
+              Regenerate
+            </Button>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 
@@ -278,7 +414,22 @@ const AdminFormComponent: React.FC = () => {
                 placeholder="Select a prompt type"
                 className={styles.select}
                 value={value || null}
-                onChange={onChange}
+                onChange={(e) => {
+                  setValue("prompt", "");
+                  setValue("modelName1", "");
+                  setValue("modelName2", "");
+                  setValue("modelName3", "");
+                  setValue("modelName4", "");
+                  setValue("text1", "");
+                  setValue("text2", "");
+                  setValue("text3", "");
+                  setValue("text4", "");
+                  setValue("image1", "");
+                  setValue("image2", "");
+                  setValue("image3", "");
+                  setValue("image4", "");
+                  onChange(e);
+                }}
                 options={promptTypeOptions}
               />
             </div>
@@ -307,6 +458,10 @@ const AdminFormComponent: React.FC = () => {
                     setValue("text2", "");
                     setValue("text3", "");
                     setValue("text4", "");
+                    setValue("image1", "");
+                    setValue("image2", "");
+                    setValue("image3", "");
+                    setValue("image4", "");
                     onChange(e.target.value);
                   }}
                   value={value}
@@ -318,10 +473,24 @@ const AdminFormComponent: React.FC = () => {
         />
 
         {promptType === "text" && (
-          <div className={styles.textSection}>
+          <div className={styles.contentSection}>
             {["modelName1", "modelName2", "modelName3", "modelName4"].map(
               (modelName, index) =>
-                renderModelSection(modelName, textFields[index], index)
+                renderModelSection(modelName, textFields[index], index, "text")
+            )}
+          </div>
+        )}
+
+        {promptType === "image" && (
+          <div className={styles.contentSection}>
+            {["modelName1", "modelName2", "modelName3", "modelName4"].map(
+              (modelName, index) =>
+                renderModelSection(
+                  modelName,
+                  imageFields[index],
+                  index,
+                  "image"
+                )
             )}
           </div>
         )}
