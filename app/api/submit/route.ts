@@ -1,4 +1,4 @@
-import { addAiDataFirebase } from "@/lib/models/AiData";
+import { addAiData } from "@/lib/models/AiData";
 import { transformPayload } from "@/utils/constants";
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
@@ -50,9 +50,7 @@ export async function POST(req: Request) {
 
     const payload = await transformPayload(body);
 
-    // await addAiData(payload);
-    // Todo: Mongo: remove this
-    await addAiDataFirebase(payload);
+    await addAiData(payload);
 
     return new NextResponse("New AI Data is added", { status: 201 });
   } catch (error) {

@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
 import {
   getDownloadURL,
   getStorage,
@@ -8,31 +7,16 @@ import {
 } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
-// Todo: Mongo
-// const firebaseConfig = {
-//   apiKey: process.env.FIREBASE_API_KEY!,
-//   authDomain: "aloha-earn.firebaseapp.com",
-//   projectId: "aloha-earn",
-//   storageBucket: "aloha-earn.appspot.com",
-//   messagingSenderId: "116075862682",
-//   appId: process.env.FIREBASE_APP_ID!,
-// };
-
-// Todo: Mongo: remove this
 const firebaseConfig = {
-  apiKey: "AIzaSyAUMdRITN2qORfmbrPA2Nz0cYxomQzWew4",
-  authDomain: "ae-firebase-901ce.firebaseapp.com",
-  projectId: "ae-firebase-901ce",
-  storageBucket: "ae-firebase-901ce.appspot.com",
-  messagingSenderId: "468836918985",
-  appId: "1:468836918985:web:d3b388094dd91c09570f18",
+  apiKey: process.env.FIREBASE_API_KEY!,
+  authDomain: "aloha-earn.firebaseapp.com",
+  projectId: "aloha-earn",
+  storageBucket: "aloha-earn.appspot.com",
+  messagingSenderId: "116075862682",
+  appId: process.env.FIREBASE_APP_ID!,
 };
 
 const app = initializeApp(firebaseConfig);
-
-// Todo: Mongo: remove this
-const db = getFirestore(app);
-export { db };
 
 const storage = getStorage(app);
 
