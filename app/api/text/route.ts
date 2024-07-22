@@ -1,5 +1,7 @@
-import { retrieveText } from "@/lib/gpt4o";
-import { modelTypes } from "@/utils/constants";
+import { retrieveGeminiText } from "@/lib/gemini";
+import { retrieveGptText } from "@/lib/gpt4o";
+import { retrieveGroqText } from "@/lib/groq";
+import { geminiModels, gptModels, grokModels } from "@/utils/constants";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -16,8 +18,12 @@ export async function POST(req: Request) {
     }
 
     let text;
-    if (modelName === modelTypes?.["gpt-4o"]) {
-      text = await retrieveText(prompt);
+    if (gptModels.includes(modelName)) {
+      text = await retrieveGptText(prompt, modelName);
+    } else if (geminiModels.includes(modelName)) {
+      text = await retrieveGeminiText(prompt, modelName);
+    } else if (grokModels.includes(modelName)) {
+      text = await retrieveGroqText(prompt, modelName);
     }
 
     return NextResponse.json({ text });

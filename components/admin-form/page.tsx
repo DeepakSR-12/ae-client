@@ -267,7 +267,10 @@ const AdminFormComponent: React.FC = () => {
                 className={styles.select}
                 placeholder="Choose an AI model"
                 value={value || null}
-                onChange={onChange}
+                onChange={(selected) => {
+                  setValue(`text${index + 1}` as keyof AIFormData, "");
+                  onChange(selected);
+                }}
                 options={
                   promptType === "text"
                     ? textModelsLabelValue
@@ -297,8 +300,9 @@ const AdminFormComponent: React.FC = () => {
               sequence={[item]}
               wrapper="span"
               cursor={true}
-              speed={70}
+              speed={60}
               repeat={1}
+              style={{ display: "inline-block" }}
             />
           ) : (
             <div className={styles.generateButton}>
@@ -311,7 +315,7 @@ const AdminFormComponent: React.FC = () => {
                 }
                 onClick={() =>
                   // @ts-ignore
-                  generateText(modelTypes[watch(`${modelName}`)], index)
+                  generateText(watch(`${modelName}`), index)
                 }
               >
                 Generate
@@ -371,7 +375,7 @@ const AdminFormComponent: React.FC = () => {
               }
               onClick={() =>
                 // @ts-ignore
-                generateText(modelTypes[watch(`${modelName}`)], index)
+                generateText(watch(`${modelName}`), index)
               }
             >
               Regenerate
@@ -390,7 +394,7 @@ const AdminFormComponent: React.FC = () => {
               }
               onClick={() =>
                 // @ts-ignore
-                generateImage(modelTypes[watch(`${modelName}`)], index)
+                generateImage(watch(`${modelName}`), index)
               }
             >
               Regenerate

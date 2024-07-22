@@ -71,16 +71,18 @@ export const transformPayload = async (body: any) => {
 };
 
 export const modelTypes: Record<string, string> = {
+  "llama3-8b-8192": "Llama 3 8B 8192",
+  "llama3-70b-8192": "Llama 3 70B 8192",
+  "mixtral-8x7b-32768": "Mixtral 8x7B 32768",
+  "gemma-7b-it": "Gemma 7B IT",
+  "gemma2-9b-it": "Gemma 2 9B IT",
+  "gemini-1.5-pro": "Gemini 1.5 Pro",
+  "gemini-1.5-flash": "Gemini 1.5 Flash",
+  "gemini-1.0-pro": "Gemini 1.0 Pro",
   "gpt-4o": "GPT-4o",
-  claude: "Claude 3.5 Sonnet",
-  llama: "llama",
-  gemini: "gemini",
-  prodia: "prodia",
-  dalle: "dall-e-3",
-  midjourney: "midjourney",
-
-  // Image models
-  "dall-e-3": "Dall·E",
+  "gpt-4o-mini": "GPT-4o Mini",
+  "dall-e-3": "Dall·E V3",
+  "dall-e-2": "Dall·E V2",
   "3Guofeng3_v34.safetensors [50f420de]": "3 Guofeng3 V3.4",
   "absolutereality_V16.safetensors [37db0fc3]": "Absolute Reality V1.6",
   "absolutereality_v181.safetensors [3d9d4d2b]": "Absolute Reality V1.8.1",
@@ -170,7 +172,22 @@ export const modelTypes: Record<string, string> = {
   // "turbovisionXL_v431.safetensors [78890989]": "Turbovision XL V4.31",
 };
 
-export const dalleModels = ["dall-e-3"];
+export const gptModels = ["gpt-4o", "gpt-4o-mini"];
+export const geminiModels = [
+  "gemini-1.5-pro",
+  "gemini-1.5-flash",
+  "gemini-1.0-pro",
+];
+
+export const grokModels = [
+  "llama3-8b-8192",
+  "llama3-70b-8192",
+  "mixtral-8x7b-32768",
+  "gemma-7b-it",
+  "gemma2-9b-it",
+];
+
+export const dalleModels = ["dall-e-3", "dall-e-2"];
 
 export const prodiaModels = [
   "3Guofeng3_v34.safetensors [50f420de]",
@@ -250,13 +267,27 @@ export const prodiaModels = [
   // "turbovisionXL_v431.safetensors [78890989]",
 ];
 
-export const textModelsLabelValue = [
+export interface LabelValue {
+  value: string;
+  label: string;
+}
+
+export const textModelsLabelValue: LabelValue[] = [
   { value: "gpt-4o", label: "GPT-4o" },
-  // { value: "claude", label: "Claude 3.5 Sonnet" },
+  { value: "gpt-4o-mini", label: "GPT-4o Mini" },
+  { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
+  { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
+  { value: "gemini-1.0-pro", label: "Gemini 1.0 Pro" },
+  { value: "llama3-8b-8192", label: "Llama 3 8B 8192" },
+  { value: "llama3-70b-8192", label: "Llama 3 70B 8192" },
+  { value: "mixtral-8x7b-32768", label: "Mixtral 8x7B 32768" },
+  { value: "gemma-7b-it", label: "Gemma 7B IT" },
+  { value: "gemma2-9b-it", label: "Gemma 2 9B IT" },
 ];
 
-export const imageModelsLabelValue = [
-  { value: "dall-e-3", label: "Dall·E" },
+export const imageModelsLabelValue: LabelValue[] = [
+  { value: "dall-e-3", label: "Dall·E V3" },
+  { value: "dall-e-2", label: "Dall·E V2" },
   { value: "3Guofeng3_v34.safetensors [50f420de]", label: "3 Guofeng3 V3.4" },
   {
     value: "absolutereality_V16.safetensors [37db0fc3]",
