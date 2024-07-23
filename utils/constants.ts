@@ -71,18 +71,38 @@ export const transformPayload = async (body: any) => {
 };
 
 export const modelTypes: Record<string, string> = {
-  "llama3-8b-8192": "Llama 3 8B 8192",
-  "llama3-70b-8192": "Llama 3 70B 8192",
-  "mixtral-8x7b-32768": "Mixtral 8x7B 32768",
-  "gemma-7b-it": "Gemma 7B IT",
-  "gemma2-9b-it": "Gemma 2 9B IT",
+  // claude
+
+  "claude-3-5-sonnet-20240620": "Claude 3.5 Sonnet",
+
+  // groq
+  "llama3-8b-8192": "Meta Llama 3 8",
+  "llama3-70b-8192": "Meta Llama 3 70B",
+  "mixtral-8x7b-32768": "Mixtral 8x7B",
+  "gemma-7b-it": "Gemma 7B",
+  "gemma2-9b-it": "Gemma 2 9B",
+
+  "llama3-groq-8b-8192-tool-use-preview": "Llama 3 Groq 8B Tool Use (Preview)",
+  "llama3-groq-70b-8192-tool-use-preview":
+    "Llama 3 Groq 70B Tool Use (Preview)",
+  "llama-3.1-8b-instant": "Llama 3.1 8B (Preview)",
+  "llama-3.1-70b-versatile": "Llama 3.1 70B (Preview)",
+  "llama-3.1-405b-reasoning": "Llama 3.1 405B (Preview)",
+
+  // gemini
   "gemini-1.5-pro": "Gemini 1.5 Pro",
   "gemini-1.5-flash": "Gemini 1.5 Flash",
   "gemini-1.0-pro": "Gemini 1.0 Pro",
+
+  // gpt
   "gpt-4o": "GPT-4o",
   "gpt-4o-mini": "GPT-4o Mini",
+
+  // dalle
   "dall-e-3": "Dall·E V3",
   "dall-e-2": "Dall·E V2",
+
+  // prodia
   "3Guofeng3_v34.safetensors [50f420de]": "3 Guofeng3 V3.4",
   "absolutereality_V16.safetensors [37db0fc3]": "Absolute Reality V1.6",
   "absolutereality_v181.safetensors [3d9d4d2b]": "Absolute Reality V1.8.1",
@@ -179,13 +199,20 @@ export const geminiModels = [
   "gemini-1.0-pro",
 ];
 
-export const grokModels = [
+export const groqModels = [
   "llama3-8b-8192",
   "llama3-70b-8192",
+  "llama3-groq-8b-8192-tool-use-preview",
+  "llama3-groq-70b-8192-tool-use-preview",
+  "llama-3.1-8b-instant",
+  "llama-3.1-70b-versatile",
+  "llama-3.1-405b-reasoning",
   "mixtral-8x7b-32768",
   "gemma-7b-it",
   "gemma2-9b-it",
 ];
+
+export const claudeModels = ["claude-3-5-sonnet-20240620"];
 
 export const dalleModels = ["dall-e-3", "dall-e-2"];
 
@@ -275,14 +302,28 @@ export interface LabelValue {
 export const textModelsLabelValue: LabelValue[] = [
   { value: "gpt-4o", label: "GPT-4o" },
   { value: "gpt-4o-mini", label: "GPT-4o Mini" },
+  { value: "claude-3-5-sonnet-20240620", label: "Claude 3.5 Sonnet" },
   { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
   { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
   { value: "gemini-1.0-pro", label: "Gemini 1.0 Pro" },
-  { value: "llama3-8b-8192", label: "Llama 3 8B 8192" },
-  { value: "llama3-70b-8192", label: "Llama 3 70B 8192" },
-  { value: "mixtral-8x7b-32768", label: "Mixtral 8x7B 32768" },
-  { value: "gemma-7b-it", label: "Gemma 7B IT" },
-  { value: "gemma2-9b-it", label: "Gemma 2 9B IT" },
+
+  { value: "llama3-8b-8192", label: "Meta Llama 3 8B" },
+  { value: "llama3-70b-8192", label: "Meta Llama 3 70B" },
+  {
+    value: "llama3-groq-8b-8192-tool-use-preview",
+    label: "Llama 3 Groq 8B Tool Use (Preview)",
+  },
+  {
+    value: "llama3-groq-70b-8192-tool-use-preview",
+    label: "Llama 3 Groq 70B Tool Use (Preview)",
+  },
+  { value: "llama-3.1-8b-instant", label: "Llama 3.1 8B (Preview)" },
+  { value: "llama-3.1-70b-versatile", label: "Llama 3.1 70B (Preview)" },
+  { value: "llama-3.1-405b-reasoning", label: "Llama 3.1 405B (Preview)" },
+
+  { value: "mixtral-8x7b-32768", label: "Mixtral 8x7B" },
+  { value: "gemma-7b-it", label: "Gemma 7B" },
+  { value: "gemma2-9b-it", label: "Gemma 2 9B" },
 ];
 
 export const imageModelsLabelValue: LabelValue[] = [

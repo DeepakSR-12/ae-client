@@ -1,7 +1,13 @@
+import { retrieveClaudeModelsText } from "@/lib/claude";
 import { retrieveGeminiText } from "@/lib/gemini";
 import { retrieveGptText } from "@/lib/gpt4o";
 import { retrieveGroqText } from "@/lib/groq";
-import { geminiModels, gptModels, grokModels } from "@/utils/constants";
+import {
+  geminiModels,
+  gptModels,
+  groqModels,
+  claudeModels,
+} from "@/utils/constants";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -22,8 +28,10 @@ export async function POST(req: Request) {
       text = await retrieveGptText(prompt, modelName);
     } else if (geminiModels.includes(modelName)) {
       text = await retrieveGeminiText(prompt, modelName);
-    } else if (grokModels.includes(modelName)) {
+    } else if (groqModels.includes(modelName)) {
       text = await retrieveGroqText(prompt, modelName);
+    } else if (claudeModels.includes(modelName)) {
+      text = await retrieveClaudeModelsText(prompt, modelName);
     }
 
     return NextResponse.json({ text });
