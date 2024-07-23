@@ -44,7 +44,7 @@ export const uploadImageToFirebase = async (
       const uniqueId = uuidv4();
       const filePath = `ai-images/${uniqueId}-${file.name}`;
       const storageRef = ref(storage, filePath);
-      uploadBytesResumable(storageRef, file);
+      await uploadBytesResumable(storageRef, file);
       return filePath;
     } catch (error) {
       console.error(`Upload attempt ${attempt + 1} failed:`, error);
