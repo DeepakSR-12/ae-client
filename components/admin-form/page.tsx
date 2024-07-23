@@ -325,7 +325,6 @@ const AdminFormComponent: React.FC = () => {
         </div>
       ) : (
         <div
-          ref={refs[index]}
           style={{
             display: "flex",
             overflow: "auto",

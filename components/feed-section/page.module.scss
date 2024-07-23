@@ -2,7 +2,7 @@
   padding: 48px 32px;
   margin-bottom: 60px;
   border-radius: 24px;
-  background-color: #F6F4F8;
+  background-color: #f6f4f8;
   line-height: 25.2px;
 }
 
@@ -28,26 +28,33 @@
   gap: 20px;
 }
 
-.imageCard {
+.card {
   border: 1px solid #989898;
   padding: 24px;
   border-radius: 24px;
   background-color: #fff;
+
+  .imageCard {
+    border-radius: 20px;
+    margin-top: 24px;
+
+    img {
+      border-radius: 20px;
+      object-fit: cover;
+      width: 100%;
+      max-height: 450px;
+    }
+  }
 }
 
-.modelName {  
+.modelName {
   span {
     font-weight: bold;
   }
 }
 
-.image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 20px;
-  margin-top: 24px;
-}
-
 .text {
   margin-top: 32px;
+  max-height: 400px;
+  overflow: auto;
 }

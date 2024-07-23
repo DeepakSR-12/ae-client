@@ -32,16 +32,20 @@ const FeedSection: React.FC<FeedSectionProps> = ({ data }) => {
           <div
             key={index}
             style={{ background: cardBackgroundColors[index] }}
-            className={styles.imageCard}
+            className={styles.card}
           >
             <div className={styles.modelName}>
               Model: &nbsp;&nbsp;<span>{model}</span>
             </div>
-            {src ? (
-              <img src={src} alt={model} className={styles.image} />
-            ) : text ? (
-              <div className={styles.text}>{text}</div>
-            ) : null}
+            <div className={styles.answerSection}>
+              {src ? (
+                <div className={styles.imageCard}>
+                  <img src={src} alt={model} />
+                </div>
+              ) : text ? (
+                <div className={styles.text}>{text}</div>
+              ) : null}
+            </div>
           </div>
         ))}
       </div>
