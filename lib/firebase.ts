@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { initializeApp } from "firebase/app";
 import {
   getDownloadURL,
