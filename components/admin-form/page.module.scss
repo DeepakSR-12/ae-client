@@ -4,6 +4,10 @@
   max-width: 1200px;
   margin: 0 auto 50px;
 
+  @media screen and (max-width: 1023px) {
+    padding: 0 24px;
+  }
+
   .label {
     font-weight: bold;
     text-wrap: nowrap;
@@ -59,6 +63,11 @@
       gap: 16px;
       margin-bottom: 40px;
 
+      @media screen and (max-width: 425px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .inputSection {
         width: 100%;
       }
@@ -69,6 +78,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+
+    @media screen and (max-width: 425px) {
+      grid-template-columns: 1fr;
+    }
 
     .modelSection {
       display: flex;

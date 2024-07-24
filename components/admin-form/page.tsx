@@ -181,8 +181,7 @@ const AdminFormComponent: React.FC = () => {
     } catch (error) {
       toast.error(`Text generation failed`);
     } finally {
-      newIsTextGenerating[index] = false;
-      setIsTextGenerating(newIsTextGenerating);
+      setIsTextGenerating([false, false, false, false]);
     }
   };
 
