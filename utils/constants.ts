@@ -302,7 +302,10 @@ export interface LabelValue {
 export const textModelsLabelValue: LabelValue[] = [
   { value: "gpt-4o", label: "GPT-4o" },
   { value: "gpt-4o-mini", label: "GPT-4o Mini" },
-  { value: "claude-3-5-sonnet-20240620", label: "Claude 3.5 Sonnet" },
+
+  // enable after billing is resolved
+  // { value: "claude-3-5-sonnet-20240620", label: "Claude 3.5 Sonnet" },
+
   { value: "gemini-1.5-pro", label: "Gemini 1.5 Pro" },
   { value: "gemini-1.5-flash", label: "Gemini 1.5 Flash" },
   { value: "gemini-1.0-pro", label: "Gemini 1.0 Pro" },
@@ -319,7 +322,9 @@ export const textModelsLabelValue: LabelValue[] = [
   },
   { value: "llama-3.1-8b-instant", label: "Llama 3.1 8B (Preview)" },
   { value: "llama-3.1-70b-versatile", label: "Llama 3.1 70B (Preview)" },
-  { value: "llama-3.1-405b-reasoning", label: "Llama 3.1 405B (Preview)" },
+
+  // It has limited access now
+  // { value: "llama-3.1-405b-reasoning", label: "Llama 3.1 405B (Preview)" },
 
   { value: "mixtral-8x7b-32768", label: "Mixtral 8x7B" },
   { value: "gemma-7b-it", label: "Gemma 7B" },
