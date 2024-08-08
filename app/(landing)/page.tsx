@@ -15,7 +15,10 @@ const Landing = () => {
     try {
       setIsLoading(true);
       const response = await axios.get("/api/ai-data");
-      if (response?.data) setFeedData(response?.data);
+      if (response?.data) {
+        const reversed = response.data.reverse();
+        setFeedData(reversed);
+      }
     } catch (err) {
       console.log(err);
     } finally {
