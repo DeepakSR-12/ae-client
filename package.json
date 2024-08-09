@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.4.0",
     "@anthropic-ai/sdk": "^0.24.3",
     "@clerk/nextjs": "^4.23.1",
     "@google/generative-ai": "^0.15.0",

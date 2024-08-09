@@ -11,7 +11,7 @@ const Landing = () => {
   const [feedData, setFeedData] = useState<FeedSectionItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchCompanies = async () => {
+  const fetchFeed = async () => {
     try {
       setIsLoading(true);
       const response = await axios.get("/api/ai-data");
@@ -27,7 +27,7 @@ const Landing = () => {
   };
 
   useEffect(() => {
-    fetchCompanies();
+    fetchFeed();
   }, []);
 
   return (

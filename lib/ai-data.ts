@@ -7,7 +7,7 @@ export const retrieveAiData = async () => {
 
     const fetchedData = await Promise.all(
       aiData.map(async (item) => {
-        if (item.promptType === "image") {
+        if (item.promptType === "image" || item.promptType === "imageUpload") {
           item.items = await Promise.all(
             item.items.map(async (imageItem) => {
               const src = await getFileDownloadURL(imageItem.src!);
