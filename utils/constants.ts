@@ -567,9 +567,9 @@ export const imageModelsLabelValue: LabelValue[] = [
 export const cardBackgroundColors = ["#F3EDFF", "#FAFFDE", "#FFF0E8", "#FFF"];
 
 export const promptTypeOptions = [
-  { value: "text", label: "Text" },
-  { value: "image", label: "Image" },
-  { value: "imageUpload", label: "Upload Model Image" },
+  { value: "text", label: "Text Generation" },
+  { value: "image", label: "Image Generation" },
+  { value: "imageUpload", label: "Upload Model Images" },
 ];
 
 export async function urlToFile(
