@@ -14,7 +14,9 @@ const Landing = () => {
   const fetchFeed = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get("/api/ai-data");
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/ai-data`
+      );
       if (response?.data) {
         const reversed = response.data.reverse();
         setFeedData(reversed);

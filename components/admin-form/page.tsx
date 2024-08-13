@@ -5,7 +5,6 @@ import { TypeAnimation } from "react-type-animation";
 import styles from "./page.module.scss";
 import {
   cardBackgroundColors,
-  convertUrlsToFiles,
   dalleModels,
   imageModelsLabelValue,
   modelTypes,
@@ -17,6 +16,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import { PlusOutlined } from "@ant-design/icons";
 import type { GetProp, UploadFile, UploadProps } from "antd";
+import { convertUrlsToFiles } from "@/utils/urlToFile";
 
 type FileType = Parameters<GetProp<UploadProps, "beforeUpload">>[0];
 
@@ -149,6 +149,52 @@ const AdminFormComponent: React.FC = () => {
       }
     }
 
+    if (promptType === "image") {
+      if (!data.image1 || !data.image2 || !data.image3 || !data.image4) {
+        if (!data.image1) {
+          toast.error("Image 1 is required");
+          return;
+        }
+        if (!data.image2) {
+          toast.error("Image 2 is required");
+          return;
+        }
+        if (!data.image3) {
+          toast.error("Image 3 is required");
+          return;
+        }
+        if (!data.image4) {
+          toast.error("Image 4 is required");
+          return;
+        }
+
+        return;
+      }
+    }
+
+    if (promptType === "text") {
+      if (!data.text1 || !data.text2 || !data.text3 || !data.text4) {
+        if (!data.text1) {
+          toast.error("Text 1 is required");
+          return;
+        }
+        if (!data.text2) {
+          toast.error("Text 2 is required");
+          return;
+        }
+        if (!data.text3) {
+          toast.error("Text 3 is required");
+          return;
+        }
+        if (!data.text4) {
+          toast.error("Text 4 is required");
+          return;
+        }
+
+        return;
+      }
+    }
+
     const formSubmitData = new FormData();
 
     formSubmitData.append("prompt", data.prompt);
@@ -174,34 +220,38 @@ const AdminFormComponent: React.FC = () => {
 
     data.imageUpload1
       ? formSubmitData.append("imageUpload1", data.imageUpload1)
-      : imageFiles.image1
+      : data.image1 && imageFiles.image1
       ? formSubmitData.append("image1", imageFiles.image1)
       : null;
 
     data.imageUpload2
       ? formSubmitData.append("imageUpload2", data.imageUpload2)
-      : imageFiles.image2
+      : data.image2 && imageFiles.image2
       ? formSubmitData.append("image2", imageFiles.image2)
       : null;
 
     data.imageUpload3
       ? formSubmitData.append("imageUpload3", data.imageUpload3)
-      : imageFiles.image3
+      : data.image3 && imageFiles.image3
       ? formSubmitData.append("image3", imageFiles.image3)
       : null;
 
     data.imageUpload4
       ? formSubmitData.append("imageUpload4", data.imageUpload4)
-      : imageFiles.image4
+      : data.image4 && imageFiles.image4
       ? formSubmitData.append("image4", imageFiles.image4)
       : null;
 
     try {
-      const response = await axios.post("/api/submit", formSubmitData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/submit`,
+        formSubmitData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       if (!response.data) {
         throw new Error("Network response was not ok");
@@ -230,10 +280,13 @@ const AdminFormComponent: React.FC = () => {
         return;
       }
 
-      const response = await axios.post("/api/text", {
-        prompt,
-        modelName,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/text`,
+        {
+          prompt,
+          modelName,
+        }
+      );
 
       if (!response.data) {
         throw new Error("Network response was not ok");
@@ -263,10 +316,13 @@ const AdminFormComponent: React.FC = () => {
         return;
       }
 
-      const response = await axios.post("/api/image", {
-        prompt,
-        modelName,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/image`,
+        {
+          prompt,
+          modelName,
+        }
+      );
 
       if (!response.data) {
         throw new Error("Network response was not ok");
