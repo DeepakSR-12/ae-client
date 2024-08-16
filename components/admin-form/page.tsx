@@ -10,6 +10,7 @@ import {
   modelTypes,
   promptTypeOptions,
   textModelsLabelValue,
+  videoModelsLabelValue,
 } from "@/utils/constants";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -26,18 +27,22 @@ export type AIFormData = {
   modelName1: string;
   text1?: string;
   image1?: string;
+  video1?: string;
   imageUpload1?: File | null;
   modelName2: string;
   text2?: string;
   image2?: string;
+  video2?: string;
   imageUpload2?: File | null;
   modelName3: string;
   text3?: string;
   image3?: string;
+  video3?: string;
   imageUpload3?: File | null;
   modelName4: string;
   text4?: string;
   image4?: string;
+  video4?: string;
   imageUpload4?: File | null;
 };
 
@@ -88,6 +93,12 @@ const AdminFormComponent: React.FC = () => {
     watch("image3"),
     watch("image4"),
   ];
+  const videoFields = [
+    watch("video1"),
+    watch("video2"),
+    watch("video3"),
+    watch("video4"),
+  ];
   const [isTextGenerating, setIsTextGenerating] = useState<boolean[]>([
     false,
     false,
@@ -96,6 +107,13 @@ const AdminFormComponent: React.FC = () => {
   ]);
 
   const [isImageGenerating, setIsImageGenerating] = useState<boolean[]>([
+    false,
+    false,
+    false,
+    false,
+  ]);
+
+  const [isVideoGenerating, setIsVideoGenerating] = useState<boolean[]>([
     false,
     false,
     false,
@@ -117,6 +135,10 @@ const AdminFormComponent: React.FC = () => {
   );
 
   const isAnyOneImageGenerating = isImageGenerating.some(
+    (isGenerating) => isGenerating
+  );
+
+  const isAnyOneVideoGenerating = isVideoGenerating.some(
     (isGenerating) => isGenerating
   );
 
@@ -341,6 +363,42 @@ const AdminFormComponent: React.FC = () => {
     }
   };
 
+  const generateVideo = async (modelName: string, index: number) => {
+    const newIsVideoGenerating = [...isVideoGenerating];
+    newIsVideoGenerating[index] = true;
+    setIsVideoGenerating(newIsVideoGenerating);
+
+    try {
+      if (!prompt) {
+        toast.error(`Prompt is required`);
+        return;
+      }
+
+      if (!modelName) {
+        toast.error(`Model Name is required`);
+        return;
+      }
+
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_API_URL}/api/video`,
+        {
+          prompt,
+          modelName,
+        }
+      );
+
+      if (!response.data) {
+        throw new Error("Network response was not ok");
+      }
+
+      setValue(`video${index + 1}` as keyof AIFormData, response.data.text);
+    } catch (error) {
+      toast.error(`Video generation failed`);
+    } finally {
+      setIsVideoGenerating([false, false, false, false]);
+    }
+  };
+
   const getBase64 = (file: FileType): Promise<string> =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -369,9 +427,8 @@ const AdminFormComponent: React.FC = () => {
     modelName: string,
     item: string | undefined,
     index: number,
-    type: "text" | "image" | "imageUpload"
+    type: "text" | "image" | "imageUpload" | "video"
   ) => {
-    const imageUploaded = watch(`imageUpload${index + 1}` as any);
     return (
       <div
         className={styles.modelSection}
@@ -397,6 +454,8 @@ const AdminFormComponent: React.FC = () => {
                   options={
                     promptType === "text"
                       ? textModelsLabelValue
+                      : promptType === "video"
+                      ? videoModelsLabelValue
                       : imageModelsLabelValue
                   }
                 />
@@ -563,6 +622,25 @@ const AdminFormComponent: React.FC = () => {
               </Button>
             </div>
           </div>
+        ) : type === "video" && item ? (
+          <div style={{ display: "flex", marginTop: "auto" }}>
+            <div className={styles.generateButton}>
+              <Button
+                loading={isVideoGenerating[index]}
+                disabled={
+                  isVideoGenerating[index] ||
+                  isSubmitting ||
+                  isAnyOneVideoGenerating
+                }
+                onClick={() =>
+                  // @ts-ignore
+                  generateVideo(watch(`${modelName}`), index)
+                }
+              >
+                Regenerate
+              </Button>
+            </div>
+          </div>
         ) : null}
       </div>
     );
@@ -691,6 +769,20 @@ const AdminFormComponent: React.FC = () => {
                   imageFields[index],
                   index,
                   "imageUpload"
+                )
+            )}
+          </div>
+        )}
+
+        {promptType === "video" && (
+          <div className={styles.contentSection}>
+            {["modelName1", "modelName2", "modelName3", "modelName4"].map(
+              (modelName, index) =>
+                renderModelSection(
+                  modelName,
+                  videoFields[index],
+                  index,
+                  "video"
                 )
             )}
           </div>

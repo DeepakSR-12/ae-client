@@ -30,6 +30,11 @@ export const modelTypes: Record<string, string> = {
   "dall-e-3": "Dall·E V3",
   "dall-e-2": "Dall·E V2",
 
+  // Replicate - Flux models
+  "black-forest-labs/flux-pro": "Flux Pro",
+  "black-forest-labs/flux-schnell": "Flux Schnell",
+  "black-forest-labs/flux-dev": "Flux Dev",
+
   // prodia
   "3Guofeng3_v34.safetensors [50f420de]": "3 Guofeng3 V3.4",
   "absolutereality_V16.safetensors [37db0fc3]": "Absolute Reality V1.6",
@@ -162,6 +167,11 @@ export const textModelsLabelValue: LabelValue[] = [
 export const imageModelsLabelValue: LabelValue[] = [
   { value: "dall-e-3", label: "Dall·E V3" },
   { value: "dall-e-2", label: "Dall·E V2" },
+
+  { value: "black-forest-labs/flux-pro", label: "Flux Pro" },
+  { value: "black-forest-labs/flux-schnell", label: "Flux Schnell" },
+  { value: "black-forest-labs/flux-dev", label: "Flux Dev" },
+
   { value: "3Guofeng3_v34.safetensors [50f420de]", label: "3 Guofeng3 V3.4" },
   {
     value: "absolutereality_V16.safetensors [37db0fc3]",
@@ -392,10 +402,31 @@ export const imageModelsLabelValue: LabelValue[] = [
   // },
 ];
 
+export const videoModelsLabelValue = [
+  {
+    value:
+      "anotherjesse/zeroscope-v2-xl:9f747673945c62801b13b84701c783929c0ee784e4748ec062204894dda1a351",
+    label: "Zeroscope V2 XL",
+  },
+  {
+    value: "deforum/deforum_stable_diffusion",
+    label: "DeForum Stable Diffusion",
+  },
+  {
+    value: "lucataco/animate-diff",
+    label: "Animate Diff",
+  },
+  {
+    value: "lucataco/hotshot-xl",
+    label: "Hotshot XL",
+  },
+];
+
 export const cardBackgroundColors = ["#F3EDFF", "#FAFFDE", "#FFF0E8", "#FFF"];
 
 export const promptTypeOptions = [
   { value: "text", label: "Text Generation" },
   { value: "image", label: "Image Generation" },
   { value: "imageUpload", label: "Upload Model Images" },
+  // { value: "video", label: "Video Generation" },
 ];

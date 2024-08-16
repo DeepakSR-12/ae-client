@@ -5,6 +5,7 @@ const nextConfig = {
       "images.prodia.xyz",
       "oaidalleapiprodscus.blob.core.windows.net",
       "firebasestorage.googleapis.com",
+      "replicate.delivery",
     ],
   },
 };
