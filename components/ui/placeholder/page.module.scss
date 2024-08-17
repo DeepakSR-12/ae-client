@@ -14,7 +14,7 @@
 
     .label {
         font-size: 2rem;
-        color: var(--text-color);
+        color: #000;
         text-align: center;
         margin-top: -70px;
     }
@@ -23,7 +23,7 @@
         display: flex;
         align-items: center;
         height: 40px;
-        background-color: var(--secondary-color);
+        background-color: #333;
         color: white;
         padding: 20px;
         cursor: pointer;
@@ -32,7 +32,7 @@
     
         &:hover {
           background-color: white;
-          color: var(--secondary-color);
+          color: #333;
         }
       }
 }
