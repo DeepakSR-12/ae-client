@@ -143,6 +143,7 @@ const AdminFormComponent: React.FC = () => {
   );
 
   const onSubmit = async (data: AIFormData) => {
+    console.log({ data });
     if (promptType === "imageUpload") {
       if (
         !data.imageUpload1 ||
@@ -238,7 +239,11 @@ const AdminFormComponent: React.FC = () => {
       image4: data.image4 ?? "",
     };
 
+    console.log({ imageUrls });
+
     const imageFiles = await convertUrlsToFiles(imageUrls);
+
+    console.log({ imageFiles });
 
     data.imageUpload1
       ? formSubmitData.append("imageUpload1", data.imageUpload1)

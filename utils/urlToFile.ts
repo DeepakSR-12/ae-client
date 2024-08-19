@@ -27,11 +27,12 @@ interface FileObject {
 }
 
 export async function convertUrlsToFiles(data: FileData): Promise<FileObject> {
+  console.log({ data });
   const filePromises = Object.entries(data).map(async ([key, value]) => {
     let file: File;
     const filename = `${key}.png`;
     const mimeType = "image/png";
-
+    console.log({ key, value });
     if (value.startsWith("data:")) {
       file = await base64ToFile(value, filename, mimeType);
     } else {
@@ -42,6 +43,7 @@ export async function convertUrlsToFiles(data: FileData): Promise<FileObject> {
   });
 
   const files = await Promise.all(filePromises);
+  console.log({ files });
   return files.reduce((acc, { key, file }) => {
     acc[key] = file;
     return acc;
